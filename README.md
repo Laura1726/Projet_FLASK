@@ -2,7 +2,7 @@
 
 Pour accéder à l'application hébergée sur PythonAnywhere via le lien suivant :
 
-[Mon projet :](https://lbornert.pythonanywhere.com)
+[Mon projet ](https://lbornert.pythonanywhere.com)
 
 Ce projet consiste en une application web développée avec **Flask** et une base de données pour la gestion des **salles** et des **ordinateurs**. Il permet de créer, modifier et supprimer des salles ainsi que des ordinateurs associés à ces salles. L'application permet également de filtrer et afficher les ordinateurs par marque, nom, prix ou par salle.
 
