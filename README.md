@@ -25,15 +25,8 @@ Ce projet consiste en une application web développée avec **Flask** et une bas
 Le projet a été réalisé dans le cadre de mon **BUT Informatique**. Il utilise les technologies suivantes :
 
 - **Flask** : Micro-framework Python pour le développement web.
-- **SQLite** : Base de données utilisée pour stocker les informations sur les salles et les ordinateurs.
+- **MySQL** : Base de données utilisée pour stocker les informations sur les salles et les ordinateurs.
 - **HTML/CSS** : Technologies utilisées pour la création de l'interface utilisateur.
-- **Bootstrap** : Pour la mise en forme et la conception responsive.
+- **Bootstrap** : Pour la mise en forme.
 
-## Installation
-
-### Prérequis
-
-- Python 3.x
-- Flask
-- SQLite (installé par défaut avec Python)
 
