@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Afficher les salles</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Salles Info</h1>
+
+    <div class="add-button-container">
+        <a class="btn btn-primary" href="/salle-info/add">Ajouter une salle</a>
+    </div>
+
+    <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom salle</th>
+                    <th>Etage</th>
+                    <th>Nombre ordinateur</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if sallesInfo | length >= 1 %}
+                    {% for ligne in sallesInfo %}
+                        <tr>
+                            <td>{{ ligne.id }}</td>
+                            <td>{{ ligne.nom }}</td>
+                            <td>{{ ligne.etage }}</td>
+                            <td>{{ ligne.nb_ordi }}</td>
+                            <td class="table-actions">
+                                <a class="btn btn-sm btn-warning" href="/salle-info/edit?id={{ ligne.id }}">Éditer</a>
+                                <a class="btn btn-sm btn-danger" href="/salle-info/delete?id={{ ligne.id }}">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center">Aucune salle trouvée</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Ajouter un ordinateur</title>
+{% endblock %}
+
+{% block body %}
+    <div class="page-container">
+        <h2>Ajout d'un ordinateur</h2>
+        <div class="white-block">
+            <div class="form-container">
+                <form method="post" action="/ordinateur/add">
+                    <div class="form-group">
+                        <label for="marque">Marque de l'ordinateur :</label>
+                        <input type="text" class="form-control" name="marque_ordinateur" id="marque" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nom">Nom de la Machine :</label>
+                        <input type="text" class="form-control" name="nom_machine" id="nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ram">RAM :</label>
+                        <input type="text" class="form-control" name="ram" id="ram" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date d'achat :</label>
+                        <input type="text" class="form-control" name="date_achat" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="salle_info">Salle :</label>
+                        <select class="form-control" name="id" id="salle_info" required>
+                            <option value="" disabled selected>Choisir une salle</option>
+                            {% for salle in salle_info %}
+                                <option value="{{ salle.id }}">{{ salle.nom }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="prix">Prix :</label>
+                        <input type="number" class="form-control" name="prix" id="prix" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image :</label>
+                        <input type="text" class="form-control" name="image" id="image">
+                    </div>
+                    <div class="form-actions">
+                        <input class="btn btn-success" type="submit" value="Créer" name="Valider">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

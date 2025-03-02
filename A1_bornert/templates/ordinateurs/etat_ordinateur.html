@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Etat</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <h1>Etat</h1>
+    <br><br>
+
+    <br><br>
+
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Nom salle</th><th>Etages</th><th>Nombre ordinateurs</th><th>Moyenne RAM</th><th>Prix Min</th><th>Prix Max</th><th>Valeur Totale</th><th>Marques</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if ordi and ordi|length >= 1 %}
+                {% for ligne in ordi %}
+                    <tr>
+                        <td>{{ ligne.salle }}</td>
+                        <td>{{ ligne.etage}}</td>
+                        <td>{{ ligne.nombre_ordinateurs }}</td>
+                        <td>{{ ligne.moyenne_ram }}</td>
+                        <td>{{ ligne.prix_minimum }}</td>
+                        <td>{{ ligne.prix_maximum }}</td>
+                        <td>{{ ligne.valeur_totale }}</td>
+                        <td>{{ ligne.marques }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3" class="text-center">
+                        Pas de données disponibles
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+     <br>
+        <div class="mt-3 mb-5">
+            <h5>Explications des calculs :</h5>
+            <ul class="list-group">
+                <li class="list-group-item">Compte le nombre d'ordinateurs dans chaque salle.</li>
+                <li class="list-group-item">Calcule la moyenne de RAM des ordinateurs dans chaque salle.</li>
+                <li class="list-group-item">Trouvent le prix minimum et maximum des ordinateurs dans chaque salle.</li>
+                <li class="list-group-item">Calcule la valeur totale des ordinateurs dans chaque salle.</li>
+                <li class="list-group-item">Crée une liste des marques d'ordinateurs uniques dans chaque salle.</li>
+                <li class="list-group-item">La requête est groupée par salle et triée par étage puis par nombre d'ordinateurs décroissant.</li>
+
+
+
+            </ul>
+        </div>
+
+    <br><br>
+
+   {# <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Nom centre</th><th>Centre de Tri</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if centre and centre|length >= 1 %}
+                {% for ligne in centre %}
+                    <tr>
+                        <td>{{ ligne.Centre_De_Tri }}</td>
+                        <td>{{ ligne.Nombre_Tournees }}</td>
+
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3" class="text-center">
+                        Pas de données disponibles
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>#}
+    </div>
+{% endblock %}
+

@@ -1,0 +1,106 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Filtre des Ordinateurs</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h2>Filtrer les Ordinateurs</h2>
+        <form method="get" action="/ordinateur/filtre" class="mb-4">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="marque" class="form-label">Marque</label>
+                    <input type="text" class="form-control" id="marque" name="marque"
+                           placeholder="Rechercher une marque d'ordinateur"
+                           value="{{ session.get('marque', '') }}">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="nom" class="form-label">Nom Machine</label>
+                    <input type="text" class="form-control" id="nom" name="nom"
+                           placeholder="Rechercher un nom de machine"
+                           value="{{ session.get('nom', '') }}">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="prix_min" class="form-label">Prix minimum</label>
+                    <input type="number" class="form-control" id="prix_min" name="prix_min"
+                           placeholder="Minimum"
+                           value="{{ session.get('prix_min', '') }}">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="prix_max" class="form-label">Prix maximum</label>
+                    <input type="number" class="form-control" id="prix_max" name="prix_max"
+                           placeholder="Maximum"
+                           value="{{ session.get('prix_max', '') }}">
+                </div>
+
+                {% if salles_info %}
+                <div class="col-12">
+                    <h5>Salles :</h5>
+                    {% for salle in salles_info %}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox"
+                               name="nomSalle" value="{{ salle.nom_salle }}"
+                               id="salle_{{ loop.index }}"
+                               {% if salle.nom_salle in session.get('nomSalle', []) %}checked{% endif %}>
+                        <label class="form-check-label" for="salle_{{ loop.index }}">
+                            {{ salle.nom_salle }} (Étage {{ salle.etage }})
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Filtrer</button>
+                    <a href="/ordinateur/filtre/suppr" class="btn btn-secondary">Réinitialiser les filtres</a>
+                </div>
+            </div>
+        </form>
+
+        {% if session.get('marque') or session.get('nom') or session.get('prix_min') or session.get('prix_max') or session.get('nomSalle') %}
+        <div class="alert alert-info">
+            <h4>Filtres actifs :</h4>
+            <ul>
+                {% if session.get('marque') %}<li>Marque : {{ session.get('marque') }}</li>{% endif %}
+                {% if session.get('nom') %}<li>Nom : {{ session.get('nom') }}</li>{% endif %}
+                {% if session.get('prix_min') and session.get('prix_max') %}
+                    <li>Prix : entre {{ session.get('prix_min') }}€ et {{ session.get('prix_max') }}€</li>
+                {% endif %}
+                {% if session.get('nomSalle') %}
+                    <li>Salles : {{ session.get('nomSalle')|join(', ') }}</li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <h2 class="mt-5">Liste des Ordinateurs</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for ordi in ordinateur %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-img-top" style="height: 200px; overflow: hidden;">
+                        <img src="/static/sujet9/{{ ordi.image }}"
+                             class="img-fluid w-100 h-100 object-fit-cover"
+                             alt="{{ ordi.marque_ordinateur }} {{ ordi.nom_machine }}">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ ordi.marque_ordinateur }} - {{ ordi.nom_machine }}</h5>
+                        <ul class="list-group list-group-flush flex-grow-1">
+                            <li class="list-group-item">Prix : {{ ordi.prix }}€</li>
+                            <li class="list-group-item">RAM : {{ ordi.ram }} Go</li>
+                            <li class="list-group-item">Salle : {{ ordi.nom_salle }}</li>
+                            <li class="list-group-item">Étage : {{ ordi.etage }}</li>
+                            <li class="list-group-item">Date d'achat : {{ ordi.date_achat }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

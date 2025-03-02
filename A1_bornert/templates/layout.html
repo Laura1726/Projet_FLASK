@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block title %}
+        <title>layout</title>
+    {% endblock %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" >
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-4.0.0-dist/css/bootstrap.css') }}" >
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" >
+        <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+{% include('_nav.html') %}
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+    {% for categorie, message in messages %}
+    <div role="alert" class="alert {{ categorie }}">
+           Information : <strong>{{ message }}</strong>
+    </div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
+{% block body %}
+    <h2 style="color:blue">layout.html</h2>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+{% endblock %}
+</body>
+</html>

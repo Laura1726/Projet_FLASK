@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Afficher les ordinateurs</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Ordinateurs</h1>
+
+    <div class="add-button-container">
+        <a class="btn btn-primary" href="/ordinateur/add">Ajouter un ordinateur</a>
+    </div>
+
+    <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Marque</th>
+                    <th>Nom Machine</th>
+                    <th>Ram</th>
+                    <th>Date Achat</th>
+                    <th>Salle</th>
+                    <th>Prix</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if ordinateur | length >= 1 %}
+                    {% for ligne in ordinateur %}
+                        <tr>
+                            <td>{{ ligne.id }}</td>
+                            <td>{{ ligne.marque }}</td>
+                            <td>{{ ligne.nom }}</td>
+                            <td>{{ ligne.ram }}</td>
+                            <td>{{ ligne.date_achat }}</td>
+                            <td>{{ ligne.salle }}</td>
+                            <td>{{ ligne.prix }}€</td>
+                            <td>
+                                <img style="width:40px;height:40px" src="/static/sujet9/{{ ligne.image }}" alt="image de {{ ligne.marque_ordinateur }}">
+                            </td>
+                            <td class="table-actions">
+                                <a class="btn btn-sm btn-warning" href="/ordinateur/edit?id={{ ligne.id }}">Éditer</a>
+                                <a class="btn btn-sm btn-danger" href="/ordinateur/delete?id={{ ligne.id }}">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="9" class="text-center">Aucun ordinateur trouvé</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

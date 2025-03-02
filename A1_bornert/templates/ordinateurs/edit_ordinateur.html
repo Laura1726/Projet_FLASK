@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    <title>Modifier un ordinateur</title>
+{% endblock %}
+
+{% block body %}
+    <div class="page-container">
+        <h2>Modifier un ordinateur</h2>
+        <div class="white-block">
+            <div class="form-container">
+                <form method="post" action="/ordinateur/edit">
+                    <input type="hidden" name="id" value="{{ ordinateurs.id }}">
+                    <div class="form-group">
+                        <label for="marque">Marque :</label>
+                        <input type="text" class="form-control" name="marque" id="marque" value="{{ ordinateurs.marque }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="nom_machine">Nom de la Machine :</label>
+                        <input type="text" class="form-control" name="nom" id="nom_machine" value="{{ ordinateurs.nom }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="ram">RAM :</label>
+                        <input type="text" class="form-control" name="ram" id="ram" value="{{ ordinateurs.ram }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date d'achat :</label>
+                        <input type="text" class="form-control" name="date_achat" id="date" value="{{ ordinateurs.date_achat }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="salle_id">Salle :</label>
+                        <select class="form-control" name="salle_id" id="salle_id" required>
+                            {% for salle in salleInfo %}
+                                <option value="{{ salle.id }}" {% if ordinateurs.salle_id == salle.id %}selected{% endif %}>
+                                    {{ salle.nom }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="prix">Prix :</label>
+                        <input type="number" class="form-control" name="prix" id="prix" value="{{ ordinateurs.prix }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image :</label>
+                        <input type="text" class="form-control" name="image" id="image" value="{{ ordinateurs.image }}">
+                    </div>
+                    <div class="form-actions">
+                        <input class="btn btn-warning" type="submit" value="Modifier" name="Modifier">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
